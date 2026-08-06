@@ -37,7 +37,7 @@ neu run
 
 ## Using a release build
 
-Releases ship as a Neutralino distribution with 8 files covering all supported platforms:
+Releases ship as a Neutralino distribution with 7 files covering all supported platforms:
 
 | File | Platform |
 |---|---|
@@ -49,8 +49,43 @@ Releases ship as a Neutralino distribution with 8 files covering all supported p
 | `Passgen-mac_universal` | macOS, universal |
 | `Passgen-win_x64.exe` | Windows, 64-bit |
 
-Download the binary for your platform from the Releases page, keep `resources.neu` in the same folder as the binary, and run the executable for your OS.
+Download the binary for your platform from the Releases page.
 
+### Linux
+
+Open a terminal in the folder where you downloaded the file. For example:
+
+```bash
+cd ~/Downloads
+chmod +x Passgen-linux_x64
+./Passgen-linux_x64
+```
+
+If you downloaded `Passgen-linux_arm64` or `Passgen-linux_armhf`, replace the file name in the commands above.
+
+### macOS
+
+Open a terminal in the folder where you downloaded the file. For example:
+
+```bash
+cd ~/Downloads
+chmod +x Passgen-mac_x64
+./Passgen-mac_x64
+```
+
+If you downloaded `Passgen-mac_arm64` or `Passgen-mac_universal`, replace the file name in the commands above.
+
+If macOS blocks the binary, Control-click it and choose Open. You can also remove the quarantine flag:
+
+```bash
+xattr -d com.apple.quarantine Passgen-mac_x64
+```
+
+### Windows
+
+Double-click `Passgen-win_x64.exe`.
+
+If Windows SmartScreen shows a warning, select `More info`, then choose `Run anyway`.
 
 ------
 
