@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- favicon -->
+    <link
+      rel="shortcut icon"
+      href="assets/icons8-key-pin-16.png"
+      type="image/x-icon"
+    />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Passgen</title>
+  </head>
+  <body>
+    <div class="theme-switcher" id="theme-switcher" aria-label="Theme switcher">
+      <span class="theme-switcher-thumb"></span>
+      <button
+        type="button"
+        class="theme-switcher-btn"
+        data-theme="light"
+        id="light-theme"
+      >
+        <i class="bi bi-sun-fill" title="Light Theme"></i>
+      </button>
+
+      <button
+        type="button"
+        class="theme-switcher-btn"
+        data-theme="dark"
+        id="dark-theme"
+      >
+        <i class="bi bi-moon-stars-fill" title="Dark Theme"></i>
+      </button>
+    </div>
+    <div class="container">
+      <h1 class="noselect">Passgen <span id="version"></span></h1>
+      <p class="noselect">Generate a random password</p>
+      <div class="password-container">
+        <label class="visually-hidden" for="password">Generated password</label>
+        <input
+          type="text"
+          name="password"
+          id="password"
+          value="Click Generate!"
+          readonly
+        />
+        <i class="bi bi-copy" id="copy-btn" title="Copy to clipboard"></i>
+      </div>
+      <!-- Other Options -->
+      <div class="options">
+        <!-- Password length -->
+        <div>
+          <div class="d-flex justify-content-between align-items-center mb-1">
+            <label for="length" class="mb-0 noselect">Length</label>
+            <output
+              for="length"
+              class="noselect"
+              id="length-value"
+              aria-hidden="true"
+            ></output>
+          </div>
+          <input
+            class="form-range w-100"
+            type="range"
+            name="length"
+            id="length"
+            min="8"
+            max="64"
+            value="16"
+            step="1"
+          />
+        </div>
+
+        <!-- Include uppercase -->
+        <div class="option form-check form-switch">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            name="uppercase"
+            id="uppercase"
+            checked
+          />
+          <label class="form-check-label" for="uppercase"
+            >Include Uppercase</label
+          >
+        </div>
+
+        <!-- Include lowercase -->
+        <div class="option form-check form-switch">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            name="lowercase"
+            id="lowercase"
+            checked
+          />
+          <label class="form-check-label" for="lowercase"
+            >Include Lowercase</label
+          >
+        </div>
+        <!-- Include numbers -->
+        <div class="option form-check form-switch">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            name="numbers"
+            id="numbers"
+            checked
+          />
+          <label class="form-check-label" for="numbers">Include Numbers</label>
+        </div>
+        <!-- Include symbols -->
+        <div class="option form-check form-switch">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            name="symbols"
+            id="symbols"
+            checked
+          />
+          <label class="form-check-label" for="symbols">Include Symbols</label>
+        </div>
+      </div>
+
+      <button class="btn btn-warning" id="generate-btn">
+        <i class="bi bi-key-fill"></i> Generate Password
+      </button>
+      <div class="strength-container">
+        <p class="noselect">
+          Password Strength: <span class="noselect" id="str-label">Medium</span>
+        </p>
+        <div class="strength-meter">
+          <div class="strength-bar"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Copy toast -->
+    <div
+      class="toast-container position-fixed top-0 end-0 p-2"
+      aria-live="polite"
+      aria-atomic="true"
+    >
+      <div
+        id="copy-toast"
+        class="toast align-items-center text-bg-success border-0 py-1 px-2"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        <div class="d-flex toast-msg">
+          <div class="toast-body py-1 px-2 small">Password copied!</div>
+          <button
+            type="button"
+            class="btn-close btn-close-white btn-close-sm me-1"
+            data-bs-dismiss="toast"
+            aria-label="Close"
+          ></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Char error toast -->
+    <div
+      class="toast-container position-fixed top-0 end-0 p-2"
+      aria-live="polite"
+      aria-atomic="true"
+    >
+      <div
+        id="onechar-toast"
+        class="toast align-items-center text-bg-danger border-0 py-1 px-2"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        <div class="d-flex toast-msg">
+          <div class="toast-body py-1 px-2 small">
+            Please select at least one character type.
+          </div>
+          <button
+            type="button"
+            class="btn-close btn-close-white btn-close-sm me-1"
+            data-bs-dismiss="toast"
+            aria-label="Close"
+          ></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascript files -->
+    <script src="js/neutralino.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

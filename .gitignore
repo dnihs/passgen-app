@@ -1,0 +1,30 @@
+# Build output
+dist/
+bin/
+
+# Temporary files
+.tmp/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+
+# Node
+node_modules/
+
+#other
+neutralinojs.log
+.tmp/
+
+# Developer tools' files
+.lite_workspace.lua
+
+# Neutralinojs client (minified)
+neutralino.js
+
+# Neutralinojs related files
+.storage
+*.log
