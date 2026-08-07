@@ -1,6 +1,8 @@
 {
   "$schema": "https://raw.githubusercontent.com/neutralinojs/neutralinojs/main/schemas/neutralino.config.schema.json",
   "applicationId": "com.dnihs.passgen",
+  "applicationName": "Passgen",
+  "description": "Passgen - Password Generator",
   "version": "0.0.5",
   "defaultMode": "window",
   "port": 0,
