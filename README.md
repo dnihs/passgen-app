@@ -16,7 +16,7 @@ A lightweight desktop password generator built with [Neutralino.js](https://neut
 
 Passgen lets you generate a random password with a custom length and a choice of character sets, then copy it to your clipboard with a single click or keystroke.
 
-> Current version (`0.0.5`) uses `Math.random()` for generation, so it is not cryptographically secure. A proper crypto-backed version is planned; until then, use this build for testing and low-stakes purposes rather than real-world security scenarios.
+> This branch holds the original experiment build of Passgen, the first working version, put together to test the idea before the real build. Password generation here uses `Math.random()`, so it's not recommended for security applications. If you're looking for something you can actually rely on, use the latest release from `main` instead.
 
 ## Clone
 
