@@ -16,7 +16,9 @@
     <title>Passgen</title>
   </head>
   <body>
+    <!-- Theme switcher -->
     <div class="theme-switcher" id="theme-switcher" aria-label="Theme switcher">
+      <!-- Light theme -->
       <span class="theme-switcher-thumb"></span>
       <button
         type="button"
@@ -27,6 +29,7 @@
         <i class="bi bi-sun-fill" title="Light Theme"></i>
       </button>
 
+      <!-- Dark theme -->
       <button
         type="button"
         class="theme-switcher-btn"
@@ -36,9 +39,11 @@
         <i class="bi bi-moon-stars-fill" title="Dark Theme"></i>
       </button>
     </div>
+
+    <!-- Main container -->
     <div class="container">
       <h1 class="noselect">Passgen <span id="version"></span></h1>
-      <p class="noselect">Generate a random password</p>
+      <p class="noselect">Generate a secure and random password</p>
       <div class="password-container">
         <label class="visually-hidden" for="password">Generated password</label>
         <input
@@ -139,6 +144,7 @@
       </div>
     </div>
 
+    <!-- Toast messages -->
     <!-- Copy toast -->
     <div
       class="toast-container position-fixed top-0 end-0 p-2"

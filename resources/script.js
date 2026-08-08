@@ -30,7 +30,7 @@ const toast1 = new bootstrap.Toast(copyToast, { delay: 1000 });
 const toast2 = new bootstrap.Toast(oneCharToast, { delay: 1500 });
 
 // Version
-version.textContent = "v0.0.5-Demo";
+version.textContent = "v0.1.4";
 
 // Theme Switcher
 function setTheme(theme) {
@@ -99,6 +99,7 @@ function createRandomPassword(
   includeNumbers,
   includeSymbols,
 ) {
+  // Building the charset
   let allCharacters = "";
 
   if (includeUpperCase) allCharacters += uppercaseLetters;
@@ -106,13 +107,36 @@ function createRandomPassword(
   if (includeNumbers) allCharacters += numberCharacters;
   if (includeSymbols) allCharacters += symbolCharacters;
 
-  let password = "";
+  // 255 byte array with enough buffer to reject
+  const pwdarray = new Uint8Array(length * 2);
+  // Randomized numbers
+  crypto.getRandomValues(pwdarray);
 
-  for (let i = 0; i < length; i++) {
-    const randomIndex = Math.floor(Math.random() * allCharacters.length);
-    password += allCharacters[randomIndex];
+  let password = "";
+  let i = 0;
+
+  while (password.length < length && i < pwdarray.length) {
+    // Get each number
+    const byte = pwdarray[i++];
+    
+    // Check for modulo bias - essentially removing unfair leftovers
+    // Very small bias but its better to address than ship vuln.
+    if (byte < 256 - (256 % allCharacters.length)) {
+      // Apppend the password
+      password += allCharacters[byte % allCharacters.length];
+    }
   }
-  return password;
+  // Return and in the very *rare* case of running out of numbers, 
+  // try again
+  return password.length === length
+    ? password
+    : createRandomPassword(
+        length,
+        includeUpperCase,
+        includeLowercase,
+        includeNumbers,
+        includeSymbols,
+      );
 }
 
 // updateStrengthMeter function - updates the strength meter according to the generate password
@@ -230,6 +254,11 @@ document.addEventListener("keydown", (e) => {
     e.preventDefault();
     createPassword();
   }
+});
+
+// Run the generator as soon as the slider changes
+lengthInput.addEventListener ("input", () => {
+  createPassword();
 });
 
 // ctrl+c or c for copying to clipboard
