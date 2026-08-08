@@ -14,9 +14,7 @@
 
 A lightweight desktop password generator built with [Neutralino.js](https://neutralino.js.org/) and Bootstrap.
 
-Passgen lets you generate a random password with a custom length and a choice of character sets, then copy it to your clipboard with a single click or keystroke.
-
-> Current version (`0.0.5`) uses `Math.random()` for generation, so it is not cryptographically secure. A proper crypto-backed version is planned; until then, use this build for testing and low-stakes purposes rather than real-world security scenarios.
+Passgen lets you generate random passwords using the Web Crypto API, with a custom length and a choice of character sets, then copies them to your clipboard with a single click or keystroke.
 
 ## Clone
 
@@ -91,7 +89,7 @@ If Windows SmartScreen shows a warning, select `More info`, then choose `Run any
 
 ## Preview
 
-<p align="center">   <img src="Screenshots/Passgen005demo.png" alt="Display Tester screenshot" width="300"> </p>
+<p align="center">   <img src="Screenshots/Passgen014.png" alt="Display Tester screenshot" width="300"> </p>
 
 ------
 
