@@ -31,7 +31,7 @@ const toast1 = new bootstrap.Toast(copyToast, { delay: 1000 });
 const toast2 = new bootstrap.Toast(oneCharToast, { delay: 1500 });
 
 // Version
-version.textContent = "v0.1.5";
+version.textContent = "v0.1.6";
 
 // Theme Switcher
 function setTheme(theme) {
@@ -88,8 +88,9 @@ function createPassword() {
   updateStrengthMeter(newPassword, poolSize);
 }
 
-// CreateRandomPassword function - Create a near random password using Math library
-// Should not be used for real wolrd scenarios
+// CreateRandomPassword function - Create a near random password using webcrypto
+// Returns both the password AND the pool size it was drawn from, computed
+// once here since this is the only place that builds allCharacters.
 function createRandomPassword(
   length,
   includeUpperCase,
@@ -145,9 +146,12 @@ function calculateEntropy(passwordLength, charPoolSize) {
   return passwordLength * Math.log2(charPoolSize);
 }
 
-// updateStrengthMeter function - updates the strength meter according to the generate password
+// updateStrengthMeter function - converts entropy (bits) into a label,
+// color, and bar width for the UI.
 function updateStrengthMeter(password, poolSize) {
   const passwordLength = password.length;
+
+  // Calculate the entropy
   const bits = calculateEntropy(passwordLength, poolSize);
   let label, color;
   if (bits < 60) {
@@ -164,15 +168,31 @@ function updateStrengthMeter(password, poolSize) {
     color = "#00c2ff";
   }
 
+// Try to convert bits -> percentage
+// Capped at 100 becuase of the bar limit, any above 100 bits shows full bar 
   const displayPercent = Math.min(100, (bits / 100) * 100);
 
+  // Setting the CSS
   strengthBar.style.width = displayPercent + "%";
   strengthBar.style.backgroundColor = color;
   strengthLabel.textContent = label;
   entropyLabel.textContent = `${Math.round(bits)}`;
 }
 
-// Change copy icon for a second to ack. write to clipboard
+// About the thresholds I used,
+
+// Thresholds are rough real-world reference points, not exact security
+// boundaries:
+//   < 60 bits  = crackable offline within a plausible timeframe by a
+//                well-resourced attacker -> Weak
+//   60-100     = impractical to brute-force today -> Medium
+//   100-180    = far beyond AES-128 equivalent -> Strong
+//   180+       = existing purely in theoretical territory -> Excellent
+
+
+
+
+// Change copy icon for a second to ack. the write to clipboard
 function showCopySuccess() {
   copyBtn.classList.remove("bi-copy");
   copyBtn.classList.add("bi-check-lg");

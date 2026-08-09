@@ -3,7 +3,7 @@
   "applicationId": "com.dnihs.passgen",
   "applicationName": "Passgen",
   "description": "Passgen - Password Generator",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "defaultMode": "window",
   "port": 0,
   "documentRoot": "/resources/",
@@ -34,7 +34,7 @@
   },
   "modes": {
     "window": {
-      "title": "Passgen 0.1.5",
+      "title": "Passgen 0.1.6",
       "width": 470,
       "height": 724,
       "minWidth": 470,

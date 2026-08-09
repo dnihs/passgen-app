@@ -8,7 +8,7 @@
   <img src="https://img.shields.io/badge/Neutralinojs-Framework-7c3aed?style=flat-square" alt="Neutralinojs">
   <img src="https://img.shields.io/badge/HTML%20%7C%20CSS%20%7C%20JavaScript-Stack-eab308?style=flat-square" alt="Stack">
   <img src="https://img.shields.io/badge/Offline-Ready-14b8a6?style=flat-square" alt="Offline Ready">
-  <img src="https://img.shields.io/badge/v0.1.5-Version-2563eb?style=flat-square" alt="Version">
+  <img src="https://img.shields.io/badge/v0.1.6-Version-2563eb?style=flat-square" alt="Version">
   <img src="https://img.shields.io/badge/MIT-License-16a34a?style=flat-square" alt="License">
 </p>
 
@@ -89,7 +89,7 @@ If Windows SmartScreen shows a warning, select `More info`, then choose `Run any
 
 ## Preview
 
-<p align="center">   <img src="Screenshots/Passgen014.png" alt="Display Tester screenshot" width="300"> </p>
+<p align="center">   <img src="Screenshots/Passgen016.png" alt="Passgen screenshot" width="300"> </p>
 
 ------
 
@@ -103,7 +103,7 @@ If Windows SmartScreen shows a warning, select `More info`, then choose `Run any
 
 At least one character type must be selected to generate a password.
 
-A strength meter (Weak / Medium / Strong) updates after each generation, based on password length and the variety of character types used.
+A strength meter (Weak / Medium / Strong / Excellent) and entropy value (in bits) update after each generation, based on password length and the size of the character pool selected.
 
 ## Keyboard shortcuts
 
