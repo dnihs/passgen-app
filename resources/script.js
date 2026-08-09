@@ -17,6 +17,7 @@ const symbolsCheckbox = document.getElementById("symbols");
 const generateButton = document.getElementById("generate-btn");
 const strengthBar = document.querySelector(".strength-bar");
 const strengthText = document.querySelector(".strength-container p");
+const entropyLabel = document.getElementById("ent-label");
 const strengthLabel = document.getElementById("str-label");
 
 // Character sets
@@ -118,7 +119,7 @@ function createRandomPassword(
   while (password.length < length && i < pwdarray.length) {
     // Get each number
     const byte = pwdarray[i++];
-    
+
     // Check for modulo bias - essentially removing unfair leftovers
     // Very small bias but its better to address than ship vuln.
     if (byte < 256 - (256 % allCharacters.length)) {
@@ -126,7 +127,7 @@ function createRandomPassword(
       password += allCharacters[byte % allCharacters.length];
     }
   }
-  // Return and in the very *rare* case of running out of numbers, 
+  // Return and in the very *rare* case of running out of numbers,
   // try again
   return password.length === length
     ? password
@@ -139,55 +140,38 @@ function createRandomPassword(
       );
 }
 
+// calculateEntropy function - Calculates the entropy value
+function calculateEntropy(passwordLength, charPoolSize) {
+  if (charPoolSize === 0) return 0;
+  return passwordLength * Math.log2(charPoolSize);
+}
+
 // updateStrengthMeter function - updates the strength meter according to the generate password
 function updateStrengthMeter(password) {
+  const charPoolSize = allCharacters.length;
   const passwordLength = password.length;
-  const hasUpperCase = /[A-Z]/.test(password);
-  const hasLowerCase = /[a-z]/.test(password);
-  const hasNumbers = /[0-9]/.test(password);
-
-  // Iterate through an array of allowed symbols and return true if any are found in the password.
-  const hasSymbols = [...symbolCharacters].some((ch) => password.includes(ch));
-
-  let strengthScore = 0;
-
-  // Math.min returns the minimum value,
-  // But at maximum it will return 40
-  strengthScore = +Math.min(passwordLength * 2, 40);
-
-  if (hasUpperCase) strengthScore += 15;
-  if (hasLowerCase) strengthScore += 15;
-  if (hasNumbers) strengthScore += 15;
-  if (hasSymbols) strengthScore += 15;
-
-  if (passwordLength < 12) {
-    // Enforce minimum score for every short password
-    strengthScore = Math.min(strengthScore, 40);
-  }
-
-  // Ensure the width of the strength bar is a valid percentage
-  const safeScore = Math.max(5, Math.min(100, strengthScore));
-  strengthBar.style.width = safeScore + "%";
-
-  let strengthLabelText = "";
-  let barColor = "";
-
-  if (strengthScore < 40) {
-    // weak password
-    barColor = "#cd1946";
-    strengthLabelText = "Weak";
-  } else if (strengthScore < 70) {
-    // Medium password
-    barColor = "#eae600";
-    strengthLabelText = "Medium";
+  const bits = calculateEntropy(passwordLength, charPoolSize);
+  let label, color;
+  if (bits < 40) {
+    label = "Weak";
+    color = "#cd1946";
+  } else if (bits < 60) {
+    label = "Medium";
+    color = "#eae600";
+  } else if (bits < 80) {
+    label = "Strong";
+    color = "#02e47b";
   } else {
-    // Strong password
-    barColor = "#02e47b";
-    strengthLabelText = "Strong";
+    label = "Excellent";
+    color = "#00c2ff";
   }
 
-  strengthBar.style.backgroundColor = barColor;
-  strengthLabel.textContent = strengthLabelText;
+  const displayPercent = Math.min(100, (bits / 100) * 100);
+
+  strengthBar.style.width = displayPercent + "%";
+  strengthBar.style.backgroundColor = color;
+  strengthLabel.textContent = label;
+  entropyLabel.textContent = `${Math.round(bits)}`;
 }
 
 // Change copy icon for a second to ack. write to clipboard
@@ -257,7 +241,7 @@ document.addEventListener("keydown", (e) => {
 });
 
 // Run the generator as soon as the slider changes
-lengthInput.addEventListener ("input", () => {
+lengthInput.addEventListener("input", () => {
   createPassword();
 });
 

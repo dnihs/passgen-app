@@ -134,10 +134,25 @@
       <button class="btn btn-warning" id="generate-btn">
         <i class="bi bi-key-fill"></i> Generate Password
       </button>
+      <!-- Strength indicators -->
       <div class="strength-container">
+        <!-- Entropy -->
         <p class="noselect">
-          Password Strength: <span class="noselect" id="str-label">Medium</span>
+          <i class="bi bi-shuffle"></i>
+          Entropy:
+          <span class="entropy-value">
+            <span class="noselect" id="ent-label">000</span>
+            <span>bits</span>
+          </span>
         </p>
+
+        <!-- Strength estimate -->
+        <p class="noselect">
+          <i class="bi bi-shield-check"></i>
+          Strength: <span class="noselect" id="str-label">Medium</span>
+        </p>
+
+        <!-- Strength meter -->
         <div class="strength-meter">
           <div class="strength-bar"></div>
         </div>

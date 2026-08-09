@@ -305,8 +305,25 @@ input[type="checkbox"] {
   font-size: 0.9rem;
   margin-bottom: 0.6rem;
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  gap: 0.4rem;
   font-weight: 500;
+}
+
+.strength-container p > i {
+  flex-shrink: 0;
+}
+
+.strength-container p .entropy-value,
+.strength-container p #str-label {
+  margin-left: auto;
+}
+
+.entropy-value {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  margin-left: 0.25rem;
 }
 
 #str-label {

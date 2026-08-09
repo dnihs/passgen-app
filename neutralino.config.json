@@ -36,9 +36,9 @@
     "window": {
       "title": "Passgen 0.1.4",
       "width": 470,
-      "height": 720,
+      "height": 724,
       "minWidth": 470,
-      "minHeight": 720,
+      "minHeight": 724,
       "center": true,
       "fullScreen": false,
       "alwaysOnTop": true,
