@@ -150,13 +150,13 @@ function updateStrengthMeter(password, poolSize) {
   const passwordLength = password.length;
   const bits = calculateEntropy(passwordLength, poolSize);
   let label, color;
-  if (bits < 40) {
+  if (bits < 60) {
     label = "Weak";
     color = "#cd1946";
-  } else if (bits < 60) {
+  } else if (bits < 100) {
     label = "Medium";
     color = "#eae600";
-  } else if (bits < 80) {
+  } else if (bits < 180) {
     label = "Strong";
     color = "#02e47b";
   } else {
