@@ -8,7 +8,7 @@
   <img src="https://img.shields.io/badge/Neutralinojs-Framework-7c3aed?style=flat-square" alt="Neutralinojs">
   <img src="https://img.shields.io/badge/HTML%20%7C%20CSS%20%7C%20JavaScript-Stack-eab308?style=flat-square" alt="Stack">
   <img src="https://img.shields.io/badge/Offline-Ready-14b8a6?style=flat-square" alt="Offline Ready">
-  <img src="https://img.shields.io/badge/v0.1.4-Version-2563eb?style=flat-square" alt="Version">
+  <img src="https://img.shields.io/badge/v0.1.5-Version-2563eb?style=flat-square" alt="Version">
   <img src="https://img.shields.io/badge/MIT-License-16a34a?style=flat-square" alt="License">
 </p>
 

@@ -31,7 +31,7 @@ const toast1 = new bootstrap.Toast(copyToast, { delay: 1000 });
 const toast2 = new bootstrap.Toast(oneCharToast, { delay: 1500 });
 
 // Version
-version.textContent = "v0.1.4";
+version.textContent = "v0.1.5";
 
 // Theme Switcher
 function setTheme(theme) {
@@ -76,19 +76,16 @@ function createPassword() {
     toast2.show();
     return;
   }
-
-  const newPassword = createRandomPassword(
+  const { password: newPassword, poolSize } = createRandomPassword(
     length,
     includeUpperCase,
     includeLowercase,
     includeNumbers,
     includeSymbols,
   );
-  // Update Password
-  passwordInput.value = newPassword;
 
-  // Update Strength meter
-  updateStrengthMeter(newPassword);
+  passwordInput.value = newPassword;
+  updateStrengthMeter(newPassword, poolSize);
 }
 
 // CreateRandomPassword function - Create a near random password using Math library
@@ -127,17 +124,19 @@ function createRandomPassword(
       password += allCharacters[byte % allCharacters.length];
     }
   }
-  // Return and in the very *rare* case of running out of numbers,
-  // try again
-  return password.length === length
-    ? password
-    : createRandomPassword(
-        length,
-        includeUpperCase,
-        includeLowercase,
-        includeNumbers,
-        includeSymbols,
-      );
+
+  if (password.length !== length) {
+    return createRandomPassword(
+      length,
+      includeUpperCase,
+      includeLowercase,
+      includeNumbers,
+      includeSymbols,
+    );
+  }
+
+  // return both computed
+  return { password, poolSize: allCharacters.length };
 }
 
 // calculateEntropy function - Calculates the entropy value
@@ -147,10 +146,9 @@ function calculateEntropy(passwordLength, charPoolSize) {
 }
 
 // updateStrengthMeter function - updates the strength meter according to the generate password
-function updateStrengthMeter(password) {
-  const charPoolSize = allCharacters.length;
+function updateStrengthMeter(password, poolSize) {
   const passwordLength = password.length;
-  const bits = calculateEntropy(passwordLength, charPoolSize);
+  const bits = calculateEntropy(passwordLength, poolSize);
   let label, color;
   if (bits < 40) {
     label = "Weak";
